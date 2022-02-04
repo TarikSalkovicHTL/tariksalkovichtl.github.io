@@ -32,9 +32,8 @@ function render(levelCards){
             d.type = cardType[j];
             d.className = "memory";
             rows.item(i).appendChild(d);
-            d.addEventListener('click', flipp(d));
         }
-
+        let flipp = document.getElementById('memory')[i].addEventlistener('click', flipp);
     }
 }
 
@@ -50,13 +49,13 @@ function shuffle(arr){
     return arr;
 }
 
-function flipp(c){
+function flipp(){
     count++;
     if(count < 3){
         if(count == 2){
 
         }
-        c.style.background = "red"
+        document.div.style.background = "red"
     }
 }
 
