@@ -20,15 +20,29 @@ div.box{
     justify-content: center;
 }
 
-div.memory{
+.memory{
     margin: 0.05vw;
     height: 100px;
     width: 100px;
-    /* margin-left: 2%;
-    margin-top: 2%; */
     background-color: blue;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
+}
+
+.flip{
+    margin: 0.05vw;
+    height: 100px;
+    width: 100px;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.image{
+    width: 90px;
+    height: 90px;
 }

@@ -1,16 +1,15 @@
-let openedCards = [];
 let count = 0;
+let flipped = []
+let pictures = ["../img/asian-blackbear.png", "../img/blackbear.png", "../img/brownbear.png", "../img/panda.png", "../img/polar-bear.png", "../img/sloth-bear.png", "../img/spectacled-bear.png", "../img/sun-bear.png"]
+
 render(16);
 
 function render(levelCards){
     const width = Math.sqrt(levelCards);
-    // if(width % 2 !== 0)
-    //     return console.log('invalid size')
-    openedCards = [];
     let cardType = [];
     for (let i = 0; i < levelCards / 2; i++){
-        cardType.push(i + 1);
-        cardType.push(i + 1);
+        cardType.push(i);
+        cardType.push(i);
     }
 
     cardType = shuffle(cardType);
@@ -27,13 +26,16 @@ function render(levelCards){
     let rows = document.getElementsByClassName('box');
     for(let i = 0; i < rows.length; i++){
         for (let j = i * width; j < (i +1) * width; j++){
-            var d = document.createElement('div');
-            d.innerHTML = cardType[j];
+            let d = document.createElement('div');
+            let img = document.createElement('img');
+            d.innerHTML = cardType[j] + 1;
             d.type = cardType[j];
             d.className = "memory";
+            img.className = "image";
+            img.src = pictures[cardType[j]]
+            d.appendChild(img)
             rows.item(i).appendChild(d);
         }
-        let flipp = document.getElementById('memory')[i].addEventlistener('click', flipp);
     }
 }
 
@@ -49,13 +51,35 @@ function shuffle(arr){
     return arr;
 }
 
-function flipp(){
-    count++;
-    if(count < 3){
-        if(count == 2){
-
+const divs = document.querySelectorAll('.memory')
+divs.forEach(div => {
+    div.addEventListener('click', () => {
+        count++;
+        if (count < 3){
+        div.classList.toggle('flip')
+        if (count == 1){
+            flipped.push(div)
         }
-        document.div.style.background = "red"
+        else if (count == 2){
+            flipped.push(div)
+            compare(flipped)
+            flipped = []
+            count = 0
+        }
+    }
+    })
+})
+
+function compare(list){
+    if(list[0].type == list[1].type){
+        alert("Bärtastisch!")
+    }
+    else{
+        setTimeout(() => {
+            list[0].classList.toggle('flip')
+            list[1].classList.toggle('flip')
+        }, 500)
+        
     }
 }
 
