@@ -1,6 +1,6 @@
 let count = 0;
 let flipped = []
-let pictures = ["../img/asian-blackbear.png", "../img/blackbear.png", "../img/brownbear.png", "../img/panda.png", "../img/polar-bear.png", "../img/sloth-bear.png", "../img/spectacled-bear.png", "../img/sun-bear.png"]
+let pictures = ["../img/asian-blackbear.png", "../img/blackbear.png", "../img/brownbear.png", "../img/panda.png", "../img/polar-bear.png", "../img/sloth-bear.png", "../img/spectacled-bear.png", "../img/red-panda.png"]
 
 render(16);
 
@@ -28,11 +28,12 @@ function render(levelCards){
         for (let j = i * width; j < (i +1) * width; j++){
             let d = document.createElement('div');
             let img = document.createElement('img');
-            d.innerHTML = cardType[j] + 1;
+            // d.innerHTML = cardType[j] + 1;
             d.type = cardType[j];
             d.className = "memory";
             img.className = "image";
             img.src = pictures[cardType[j]]
+            img.style.visibility = 'hidden'
             d.appendChild(img)
             rows.item(i).appendChild(d);
         }
@@ -51,12 +52,12 @@ function shuffle(arr){
     return arr;
 }
 
-const divs = document.querySelectorAll('.memory')
-divs.forEach(div => {
+document.querySelectorAll('.memory').forEach(div => {
     div.addEventListener('click', () => {
         count++;
         if (count < 3){
         div.classList.toggle('flip')
+        div.querySelector('.image').style.visibility = 'visible'
         if (count == 1){
             flipped.push(div)
         }
@@ -78,6 +79,8 @@ function compare(list){
         setTimeout(() => {
             list[0].classList.toggle('flip')
             list[1].classList.toggle('flip')
+            list[0].querySelector('.image').style.visibility = 'hidden'
+            list[1].querySelector('.image').style.visibility = 'hidden'
         }, 500)
         
     }
