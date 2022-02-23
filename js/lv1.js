@@ -1,5 +1,11 @@
 let count = 0;
 let flipped = []
+let cardpairs = 0
+let timeinterval;
+let timer = 0;
+let moves = 0;
+let startgame = true;
+let endgame = false;
 let pictures = ["../img/asian-blackbear.png", "../img/blackbear.png", "../img/brownbear.png", "../img/panda.png", "../img/polar-bear.png", "../img/sloth-bear.png", "../img/spectacled-bear.png", "../img/red-panda.png"]
 
 render(16);
@@ -54,6 +60,15 @@ function shuffle(arr){
 
 document.querySelectorAll('.memory').forEach(div => {
     div.addEventListener('click', () => {
+        if(startgame == true && endgame == false){
+            timeinterval = setInterval(function() {
+                timer++;
+                console.log(timer)
+                document.querySelector("#time").innerHTML = 'Time: ' + timer
+            }, 1000)
+        }
+        moves++
+        document.querySelector("#moves").innerHTML = 'Moves: ' + Math.floor(moves / 2)
         count++;
         if (count < 3){
         div.classList.toggle('flip')
@@ -67,13 +82,19 @@ document.querySelectorAll('.memory').forEach(div => {
             flipped = []
             count = 0
         }
+        endgame = true;
+    }
+    if(cardpairs == 8){
+        clearInterval(timeinterval)
+        alert("Congratulations! You won my memory game!")
     }
     })
 })
 
 function compare(list){
     if(list[0].type == list[1].type){
-        alert("Bärtastisch!")
+        cardpairs++
+        handler;
     }
     else{
         setTimeout(() => {
@@ -84,5 +105,10 @@ function compare(list){
         }, 500)
         
     }
+}
+
+function handler(e){
+    e.stopPropagation();
+    e.preventDefault();
 }
 
