@@ -34,7 +34,6 @@ function render(levelCards){
         for (let j = i * width; j < (i +1) * width; j++){
             let d = document.createElement('div');
             let img = document.createElement('img');
-            // d.innerHTML = cardType[j] + 1;
             d.type = cardType[j];
             d.className = "memory";
             img.className = "image";
@@ -71,24 +70,28 @@ document.querySelectorAll('.memory').forEach(div => {
         document.querySelector("#moves").innerHTML = 'Moves: ' + Math.floor(moves / 2)
         count++;
         if (count < 3){
-        div.classList.toggle('flip')
-        div.querySelector('.image').style.visibility = 'visible'
-        if (count == 1){
-            flipped.push(div)
+            div.classList.toggle('flip')
+            div.querySelector('.image').style.visibility = 'visible'
+            if (count == 1){
+                flipped.push(div)
+            }
+            else if (count == 2){
+                flipped.push(div)
+                compare(flipped)
+                flipped = []
+                count = 0
+            }
+            endgame = true;
         }
-        else if (count == 2){
-            flipped.push(div)
-            compare(flipped)
-            flipped = []
-            count = 0
+        if(cardpairs == 8){
+            clearInterval(timeinterval)
+            alert("Congratulations! You won my memory game!")
         }
-        endgame = true;
-    }
-    if(cardpairs == 8){
-        clearInterval(timeinterval)
-        alert("Congratulations! You won my memory game!")
-    }
     })
+})
+
+document.querySelector("#restart").addEventListener('click', () => {
+    location.reload();
 })
 
 function compare(list){
