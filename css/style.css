@@ -45,7 +45,11 @@ div.box{
     margin: 0.05vw;
     height: 100px;
     width: 100px;
-    background-color: blue;
+    background-image: url(../img/question-block-background.png);
+    background-size: 90px;
+    background-repeat: no-repeat;
+    background-color: royalblue;
+    background-position-x: center;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,7 +60,8 @@ div.box{
     margin: 0.05vw;
     height: 100px;
     width: 100px;
-    background-color: red;
+    background-color: #6BD957;
+    background-image: none;
     display: flex;
     align-items: center;
     justify-content: center;
